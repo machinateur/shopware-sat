@@ -1,6 +1,6 @@
 # Shopware Superior Admin Tabs Plugin
 
-Add tabs to the shopware 6 administration.
+Add tabs to the Shopware 6 administration.
 
 > TODO: Screenshot.
 
