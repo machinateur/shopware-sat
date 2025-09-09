@@ -1,0 +1,32 @@
+{
+    "name": "machinateur/shopware-sat",
+    "description": "Add tabs to the shopware 6 administration.",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.7.0",
+        "shopware/administration": "~6.7.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Machinateur\\Shopware\\SuperiorAdminTabsPlugin\\SuperiorAdminTabsPlugin",
+        "label": {
+            "en-GB": "Superior admin tabs",
+            "de-DE": "Superior admin tabs"
+        },
+        "description": {
+            "en-GB": "Add tabs to the shopware administration",
+            "de-DE": "Füge tabs zur Shopware Administration hinzu."
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Machinateur\\Shopware\\SuperiorAdminTabsPlugin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Machinateur\\Shopware\\SuperiorAdminTabsPlugin\\Tests\\": "tests/"
+        }
+    }
+}
