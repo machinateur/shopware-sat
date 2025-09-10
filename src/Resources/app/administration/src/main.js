@@ -22,17 +22,36 @@
  * SOFTWARE.
  */
 
-import 'app/component/sw-desktop';
-import 'app/component/sw-desktop-tabs';
+// Collect all routes.
+let routes = [];
 
-Module.register('superior-admin-tabs-plugin', {
-    routeMiddleware(next, currentRoute)
-    {
-        if (currentRoute.name === 'core') {
-            currentRoute.component = 'sw-desktop-tabs';
+Shopware.Module.register('sat-plugin', {
+    color: '#ff3d58',
+    icon: 'default-shopping-paper-bag-product',
+
+    title: 'Superior Admin Tabs Plugin',
+    description: 'Add tabs to the Shopware 6 administration.',
+
+    routes: {
+        tab: {
+            component: 'sw-desktop-tab',
+            path: 'tab',
+            //children: routes,
+        }
+    },
+
+    routeMiddleware(next, currentRoute) {
+        console.log(currentRoute);
+
+        if (0 > ['core', 'error'].indexOf(currentRoute)) {
+            routes.push(currentRoute);
+
+            return;
         }
 
         next(currentRoute);
     }
 });
 
+import './app/component/sw-desktop';
+import './app/component/sw-desktop-tab';

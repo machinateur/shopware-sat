@@ -22,15 +22,23 @@
  * SOFTWARE.
  */
 
-import template from './sw-desktop-tabs.html.twig';
-import './sw-desktop.scss';
+Shopware.Component.extend('sw-desktop-tab', 'sw-desktop', {
+    computed: {
+        enableAdminTabs()
+        {
+            return false;
+        },
+    },
 
-const { Component } = Shopware;
-const { hasOwnProperty } = Shopware.Utils.object;
+    methods: {
+        createdComponent() {
+            this.$super('createdComponent');
+        },
 
-Component.extend('sw-desktop', 'sw-desktop-tabs', {
-    template,
+        checkRouteSettings() {
+            this.$super('checkRouteSettings');
 
-    // TODO: Override template with tabs in main view, sidebar visible.
-    //  Make use of the plugin config option, to decide whether to show default behaviour.
+            this.noNavigation = false;
+        },
+    },
 });

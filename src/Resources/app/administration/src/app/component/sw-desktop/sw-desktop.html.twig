@@ -1,0 +1,28 @@
+{% block sw_desktop_content %}
+    {% block sw_desktop_content_tabs %}
+        <template v-if="enableAdminTabs">
+            <sw-tabs class="sw-desktop__tabs" :small="false" position-identifier="desktop-tabs">
+                {% block sw_desktop_tabs_main %}
+                    <sw-tabs-item
+                            class="sw-desktop__tab-main"
+                            :route="{ name: mainTab.route }"
+                            :hasError="mainTab.error"
+                            :title="$tc('sw-desktop-tab.tab.main')">
+                        {{ $tc('sw-desktop-tab.tab.main') }}
+                    </sw-tabs-item>
+                {% endblock %}
+            </sw-tabs>
+
+            <div class="sw-desktop__content">
+                <sw-error-boundary>
+                    <!--<router-view name="sat-plugin" />-->
+                    <router-view />
+                </sw-error-boundary>
+            </div>
+        </template>
+    {% endblock %}
+
+    <template v-else>
+        {% parent() %}
+    </template>
+{% endblock %}

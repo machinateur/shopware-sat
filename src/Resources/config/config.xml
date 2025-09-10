@@ -28,12 +28,13 @@
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
 
     <card>
-        <title>Enabled</title>
+        <title>Features</title>
+        <title lang="de-DE">Features</title>
 
         <input-field type="bool">
-            <name>useAdminTabs</name>
+            <name>enableAdminTabs</name>
             <label>Enable admin tabs</label>
-            <label lang="de-DE">Admin tabs nutzen</label>
+            <label lang="de-DE">Admin Tabs verwenden</label>
             <defaultValue>1</defaultValue>
         </input-field>
     </card>

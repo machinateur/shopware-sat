@@ -25,11 +25,42 @@
 import template from './sw-desktop.html.twig';
 import './sw-desktop.scss';
 
-const { Component } = Shopware;
-const { hasOwnProperty } = Shopware.Utils.object;
-
-Component.override('sw-desktop', {
+Shopware.Component.override('sw-desktop', {
     template,
 
-    // TODO: Set sidebar to hidden by default.
+    computed: {
+        enableAdminTabs()
+        {
+            // TODO: Make use of the plugin config option, to decide whether to show default behaviour.
+            return true;
+        },
+
+        mainTab()
+        {
+            return {
+                id: 'main',
+                error: null,
+                route: 'sat.plugin.tab',
+            };
+        },
+
+        tabs()
+        {
+            return [];
+        },
+    },
+
+    methods: {
+        createdComponent()
+        {
+            this.$super('createdComponent');
+        },
+
+        checkRouteSettings()
+        {
+            this.$super('checkRouteSettings');
+
+            this.noNavigation = this.noNavigation || this.enableAdminTabs;
+        },
+    },
 });
