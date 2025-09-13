@@ -22,45 +22,10 @@
  * SOFTWARE.
  */
 
-import template from './sw-desktop.html.twig';
-import './sw-desktop.scss';
+//import template from './sw-desktop.html.twig';
+//import './sw-desktop.scss';
 
 Shopware.Component.override('sw-desktop', {
-    template,
-
-    computed: {
-        enableAdminTabs()
-        {
-            // TODO: Make use of the plugin config option, to decide whether to show default behaviour.
-            return true;
-        },
-
-        mainTab()
-        {
-            return {
-                id: 'main',
-                error: null,
-                route: 'sat.plugin.tab',
-            };
-        },
-
-        tabs()
-        {
-            return [];
-        },
-    },
-
-    methods: {
-        createdComponent()
-        {
-            this.$super('createdComponent');
-        },
-
-        checkRouteSettings()
-        {
-            this.$super('checkRouteSettings');
-
-            this.noNavigation = this.noNavigation || this.enableAdminTabs;
-        },
-    },
+    // TODO: Add link to desktop tabs (if top-level) view.
+    //template,
 });

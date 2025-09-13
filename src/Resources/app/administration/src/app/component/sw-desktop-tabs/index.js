@@ -22,23 +22,33 @@
  * SOFTWARE.
  */
 
-Shopware.Component.extend('sw-desktop-tab', 'sw-desktop', {
+import template from './sw-desktop-tabs.html.twig';
+import './sw-desktop-tabs.scss';
+
+Shopware.Component.extend('sw-desktop-tabs', 'sw-desktop', {
+    template,
+
     computed: {
-        enableAdminTabs()
+        mainTab()
         {
-            return false;
+            return {
+                id: 'main',
+                error: null,
+                route: 'sat.plugin.desktop',
+            };
+        },
+
+        tabs()
+        {
+            return [];
         },
     },
 
     methods: {
         createdComponent() {
             this.$super('createdComponent');
-        },
 
-        checkRouteSettings() {
-            this.$super('checkRouteSettings');
-
-            this.noNavigation = false;
+            this.noNavigation = true;
         },
     },
 });

@@ -22,10 +22,34 @@
  * SOFTWARE.
  */
 
-// Collect all routes.
-let routes = [];
+// The desktop route is a child route of the tabs (root) tabs route, when children get assigned to all `root` core routes.
+//  The children are collected by a route middleware and referenced in the (module) route definition.
+let desktopChildren = [];
+const desktopRoute = {
+    path:'desktop',
+    name: 'desktop',
+    component: 'sw-desktop',
+    //redirect: '/sw/dashboard/index',
+    children: desktopChildren,
+};
+
+let tabsRoute = {
+    path: '/sw/dashboard/tabs',
+    name: 'tabs',
+    coreRoute: true,
+    //root: true,
+    component: 'sw-desktop-tabs',
+    // will be replaced in router (root)
+    children: {
+        desktop: desktopRoute,
+    },
+};
+
 
 Shopware.Module.register('sat-plugin', {
+    name: 'sat-plugin',
+    type: 'core',
+
     color: '#ff3d58',
     icon: 'default-shopping-paper-bag-product',
 
@@ -33,25 +57,30 @@ Shopware.Module.register('sat-plugin', {
     description: 'Add tabs to the Shopware 6 administration.',
 
     routes: {
-        tab: {
-            component: 'sw-desktop-tab',
-            path: 'tab',
-            //children: routes,
-        }
+        tabs: tabsRoute,
+
+        desktop: desktopRoute,
     },
 
     routeMiddleware(next, currentRoute) {
-        console.log(currentRoute);
+        if ('sat.plugin.tabs' !== currentRoute
+            || 'sat.plugin.desktop' !== currentRoute
+        ) {
+            (function () {
+                const initContainer = Shopware.Application.getContainer('init');
 
-        if (0 > ['core', 'error'].indexOf(currentRoute)) {
-            routes.push(currentRoute);
+                initContainer.router.addRoutes([tabsRoute]);
+            }());
 
             return;
         }
 
-        next(currentRoute);
+        // Collect all routes.
+        desktopChildren.push(currentRoute);
     }
 });
 
+//Shopware.Service().addDecorator()
+
 import './app/component/sw-desktop';
-import './app/component/sw-desktop-tab';
+import './app/component/sw-desktop-tabs';
